@@ -6,7 +6,7 @@ import moment from 'moment'
 import PortfolioContainer from './portfolio/portfolio-container'
 
 
-const hello = 'Thanks for coming to my Page , any questions just ask and the time is: ';
+
 
 
 export default class App extends Component {
@@ -16,7 +16,7 @@ export default class App extends Component {
       <div className='app'>
         <h1>Jacob Mason Portfolio</h1>  
         
-        <div>{hello + ' ' + moment().format('MMMM Do YYYY, h:mm:ss a')}</div>   
+        <div>{moment().format('MMMM Do YYYY, h:mm:ss a')}</div>   
         <PortfolioContainer />
 
       </div>

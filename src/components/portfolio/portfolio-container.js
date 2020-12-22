@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import React, { Component } from "react"
 import PortfolioItem from "./portfolio-items"
 
@@ -8,20 +9,29 @@ import PortfolioItem from "./portfolio-items"
 export default class PortfolioContainer extends Component {
     constructor(){
         super();
-        console.log('Portfolio Container has Rendered');
+
+        this.state = {
+            pageTitle: "Welcome to my Portfolio",
+            data: [
+                {title:'Quip'},
+                {title: 'Eventbrite'}, 
+                {title:'Ministry Safe'},
+                {title: 'SwingAway'}
+            ]            
+        }
         
     }
 // dynamic in nature and allows you to map the data and putting it on the screen no more hardcoding
     portfolioItems() {
-        const data = ['Quip', 'Eventbrite', 'Ministry Safe' ] 
-        return data.map(item => {
-            return <PortfolioItem title={item} url={'google.com'} />
+        
+        return this.state.data.map(item => {
+            return <PortfolioItem title={item.title} url={'google.com'} />
         })
     }
     render(){
         return(
             <div>
-                <h2>Portfolio items go here </h2>
+                <h2>{this.state.pageTitle} </h2>
                 
                 {this.portfolioItems()}
             </div>
