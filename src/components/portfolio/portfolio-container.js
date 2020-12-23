@@ -12,6 +12,7 @@ export default class PortfolioContainer extends Component {
 
         this.state = {
             pageTitle: "Welcome to my Portfolio",
+            isLoading: false,
             data: [
                 {title:'Quip', category: 'eCommerce'},
                 {title: 'Eventbrite', category: 'Scheduling'}, 
@@ -43,7 +44,10 @@ export default class PortfolioContainer extends Component {
         })
 
     }
-    render(){
+    render(){ // this is called conditional rendering, and is a popular pattern 
+        if(this.state.isLoading) { 
+            return <div>Give Me Nuggies....</div>
+        }
         return(
             <div>
                 <h2>{this.state.pageTitle} </h2>
