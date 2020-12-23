@@ -13,15 +13,16 @@ export default class PortfolioContainer extends Component {
         this.state = {
             pageTitle: "Welcome to my Portfolio",
             data: [
-                {title:'Quip'},
-                {title: 'Eventbrite'}, 
-                {title:'Ministry Safe'},
-                {title: 'SwingAway'}
+                {title:'Quip', category: 'eCommerce'},
+                {title: 'Eventbrite', category: 'Scheduling'}, 
+                {title:'Ministry Safe', category: 'Enterprise'},
+                {title: 'SwingAway', category: 'eCommerce'}
             ]            
         }
         // this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this)
     }
 // dynamic in nature and allows you to map the data and putting it on the screen no more hardcoding
+// this.handleFilter = this.handleFilter.bind(this)
     portfolioItems() {
         
         return this.state.data.map(item => {
@@ -34,12 +35,24 @@ export default class PortfolioContainer extends Component {
             pageTitle: "Something Else"
         })
     }
- 
+    handleFilter = (filter) => {
+        this.setState({
+            data: this.state.data.filter(item => {
+                return item.category === filter;
+            })
+        })
+
+    }
     render(){
         return(
             <div>
                 <h2>{this.state.pageTitle} </h2>
                 
+                <button onClick={() => this.handleFilter('eCommerce')}>eCommerce</button>
+                <button onClick={() => this.handleFilter('Enterprise')}>Enterprise</button>
+                <button onClick={() => this.handleFilter('Scheduling')}>Scheduling</button>
+
+
                 {this.portfolioItems()}
 
                 <hr/>
