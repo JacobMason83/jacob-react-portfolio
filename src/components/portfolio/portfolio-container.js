@@ -19,7 +19,7 @@ export default class PortfolioContainer extends Component {
                 {title: 'SwingAway'}
             ]            
         }
-        
+        // this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this)
     }
 // dynamic in nature and allows you to map the data and putting it on the screen no more hardcoding
     portfolioItems() {
@@ -28,12 +28,27 @@ export default class PortfolioContainer extends Component {
             return <PortfolioItem title={item.title} url={'google.com'} />
         })
     }
+
+    handlePageTitleUpdate = () => {
+        this.setState({
+            pageTitle: "Something Else"
+        })
+    }
+ 
     render(){
         return(
             <div>
                 <h2>{this.state.pageTitle} </h2>
                 
                 {this.portfolioItems()}
+
+                <hr/>
+
+                <button onClick={this.handlePageTitleUpdate}>Change Title</button>
+
+                <hr />
+
+                <button onclick={this.handlePageTitleReset}>Reset Me</button>
             </div>
         )
     }
