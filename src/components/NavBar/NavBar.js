@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { NavLink } from 'react-router-dom'
 
 export default class NavBar extends Component {
     constructor() {
@@ -8,8 +8,15 @@ export default class NavBar extends Component {
     render() {
         return (
             <div>
-                <button>Home</button>
-                <button>About</button>
+               
+            <NavLink exact to="/">
+                Home
+            </NavLink> 
+            <NavLink to="about-me">
+                About
+            </NavLink>
+
+
                 <button>Contact</button>
                 <button>Blog</button>
                 {false ? <button>Add Blog</button> : null} 
