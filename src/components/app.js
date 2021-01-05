@@ -9,13 +9,27 @@ import About from './pages/about'
 import Contact from './pages/contact'
 import Blog from './pages/blog'
 import PortfolioDetail from './portfolio/portfolio-detail'
+import NoMatch from './pages/no-match'
 
 
 
 
 
 export default class App extends Component {
+  const [state, setState] = useState({
+    one: "Ryan",
+    two: "jacob"
+  })
+
+  setState({
+    ...state,
+    two: "somoene else"
+  })
   render () {
+    const names = {
+      one: "ryan", 
+      two: "jacob"
+    }
     return (
       <div className='app'>
         <Router>
@@ -30,6 +44,7 @@ export default class App extends Component {
               <Route path='/contact' component={Contact} />
               <Route path='/blog' component={Blog} />
               <Route path='/portfolio:slug' component={PortfolioDetail} />
+              <Route component={NoMatch} />
             </Switch>
           </div>
         </Router>

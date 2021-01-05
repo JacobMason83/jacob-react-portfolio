@@ -46,7 +46,7 @@ export default class PortfolioContainer extends Component {
     }
     render(){ // this is called conditional rendering, and is a popular pattern 
         if(this.state.isLoading) { 
-            return <div>Give Me Nuggies....</div>
+            return <div></div>
         }
         return(
             <div>
@@ -65,7 +65,7 @@ export default class PortfolioContainer extends Component {
 
                 <hr />
 
-                <button onclick={this.handlePageTitleReset}>Reset Me</button>
+                <button onClick={this.handlePageTitleReset}>Reset Me</button>
             </div>
         )
     }
