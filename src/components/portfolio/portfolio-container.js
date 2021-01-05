@@ -23,10 +23,12 @@ export default class PortfolioContainer extends Component {
 // dynamic in nature and allows you to map the data and putting it on the screen no more hardcoding
 // this.handleFilter = this.handleFilter.bind(this)
     portfolioItems() {
-        
+// data that we will need 
+// background image thumb_image_url , logo: logo_url , description: description,
+// id : id
         return this.state.data.map(item => {
             // console.log("Portfolio item", item)
-            debugger;
+            
             return <PortfolioItem key={item.id} title={item.name} url={item.url} slug={item.id} />
         })
     }
