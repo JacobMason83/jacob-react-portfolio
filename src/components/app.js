@@ -15,27 +15,12 @@ import NoMatch from './pages/no-match'
 
 
 
-const axios = require('axios');
-export default class App extends Component {
-  constructor(){
-    super()
-    this.getPortfolioItems = this.getPortfolioItems.bind(this)
-  }
-  getPortfolioItems() {
 
-    axios
-    .get('https://jacobmason.devcamp.space/portfolio/portfolio_items')
-    .then((response) => {
-      // handle success
-      console.log(response);
-    })
-    .catch((error) => {
-      // handle error
-      console.log(error);
-    })  
-  }
+export default class App extends Component {
+
+
   render () {
-    this.getPortfolioItems()
+    
     return (
       <div className='app'>
         <Router>
