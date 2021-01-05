@@ -5,10 +5,10 @@
   "scripts": {
     "preinstall": "npm set audit false",
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
-    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color", 
+    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "heroku-postbuild": "npm run build",
     "precommit": "eslint src",
-    "prod": "NODE_ENV=production node server.js"    
+    "prod": "NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
   "dependencies": {
     "ajv": "6.12.0",
     "autoprefixer": "^9.1.0",
-    "axios": "0.19.2",
+    "axios": "^0.19.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment'
+import Axios from 'axios'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // component based imports go below library imports and have relative paths 
 
@@ -14,22 +15,27 @@ import NoMatch from './pages/no-match'
 
 
 
-
+const axios = require('axios');
 export default class App extends Component {
-  const [state, setState] = useState({
-    one: "Ryan",
-    two: "jacob"
-  })
+  constructor(){
+    super()
+    this.getPortfolioItems = this.getPortfolioItems.bind(this)
+  }
+  getPortfolioItems() {
 
-  setState({
-    ...state,
-    two: "somoene else"
-  })
+    axios
+    .get('https://jacobmason.devcamp.space/portfolio/portfolio_items')
+    .then((response) => {
+      // handle success
+      console.log(response);
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    })  
+  }
   render () {
-    const names = {
-      one: "ryan", 
-      two: "jacob"
-    }
+    this.getPortfolioItems()
     return (
       <div className='app'>
         <Router>
