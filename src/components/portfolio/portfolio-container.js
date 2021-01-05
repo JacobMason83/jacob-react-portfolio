@@ -29,7 +29,7 @@ export default class PortfolioContainer extends Component {
         return this.state.data.map(item => {
             // console.log("Portfolio item", item)
             
-            return <PortfolioItem key={item.id} title={item.name} url={item.url} slug={item.id} />
+            return <PortfolioItem key={item.id} item={item} />
         })
     }
 
@@ -69,6 +69,7 @@ export default class PortfolioContainer extends Component {
         if(this.state.isLoading) { 
             return <div></div>
         }
+        
         return(
             <div>
                 <h2>{this.state.pageTitle} </h2>
