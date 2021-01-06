@@ -8,8 +8,8 @@ export default class NavBar extends Component {
     render() {
         console.log(this.props)
         return (
-            <div>
-               
+            <div className="nav-wrapper"> 
+            <div className="left-side" >             
             <NavLink exact to="/" activeClassName="nav-link-active">
                 Home
             </NavLink> 
@@ -26,6 +26,10 @@ export default class NavBar extends Component {
 
                
                 {false ? <button>Add Blog</button> : null} 
+                </div>
+                <div className="right-side">
+                    JACOB MASON
+                </div>
             </div>
         )
     }
