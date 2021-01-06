@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment'
-import Axios from 'axios'
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // component based imports go below library imports and have relative paths 
 
@@ -25,8 +24,7 @@ export default class App extends Component {
       <div className='app'>
         <Router>
           <div>
-          <h1>Jacob Masons Portfolio</h1>
-          <div>{moment().format('MMMM Do YYYY, h:mm:ss a')}</div>
+          
             <NavBar />
             <Switch>
               {/* root route  */}
