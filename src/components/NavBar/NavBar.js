@@ -15,14 +15,14 @@ export default class NavBar extends Component {
         Home
       </NavLink>
     </div>
-    <div className='nav-link-wrapper'>
-      <NavLink to='about-me'>About</NavLink>
+    <div className='nav-link-wrapper' >
+      <NavLink to='about-me' activeClassName='nav-link-active'>About</NavLink>
     </div>
     <div className='nav-link-wrapper'>
-      <NavLink to='contact'>Contact</NavLink>
+      <NavLink to='contact' activeClassName='nav-link-active'>Contact</NavLink>
     </div>
     <div className='nav-link-wrapper'>
-      <NavLink to='blog'>Blog</NavLink>
+      <NavLink to='blog' activeClassName='nav-link-active'>Blog</NavLink>
     </div>
 
     {false ? <button>Add Blog</button> : null}
