@@ -23,9 +23,7 @@ export default class PortfolioContainer extends Component {
 // dynamic in nature and allows you to map the data and putting it on the screen no more hardcoding
 // this.handleFilter = this.handleFilter.bind(this)
     portfolioItems() {
-// data that we will need 
-// background image thumb_image_url , logo: logo_url , description: description,
-// id : id
+
         return this.state.data.map(item => {
             // console.log("Portfolio item", item)
             
@@ -67,7 +65,7 @@ export default class PortfolioContainer extends Component {
       }
     render(){ // this is called conditional rendering, and is a popular pattern 
         if(this.state.isLoading) { 
-            return <div></div>
+            return <div>Loading...</div>
         }
         
         return(

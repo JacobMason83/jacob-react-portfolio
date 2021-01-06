@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom'
 
 export default class NavBar extends Component {
     constructor(props) {
-        super()
+        super(props)
     }
     render() {
-        console.log(this.props)
+        
         return (
 <div className='nav-wrapper'>
   <div className='left-side'>
