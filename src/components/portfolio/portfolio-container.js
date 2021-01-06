@@ -79,15 +79,11 @@ export default class PortfolioContainer extends Component {
                 <button onClick={() => this.handleFilter('Scheduling')}>Scheduling</button>
 
 
+                <div className="portfolio-items-wrapper">
                 {this.portfolioItems()}
 
-                <hr/>
-
-                <button onClick={this.handlePageTitleUpdate}>Change Title</button>
-
-                <hr />
-
-                <button onClick={this.handlePageTitleReset}>Reset Me</button>
+                </div>
+                
             </div>
         )
     }
