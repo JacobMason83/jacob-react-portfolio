@@ -27,7 +27,7 @@ export default class PortfolioItem extends Component {
         >
         <div 
           className={
-              "portfolio-img-background" + this.state.portfolioItemClass
+              "portfolio-img-background " + this.state.portfolioItemClass
           }
           style={{
               backgroundImage:"url(" + thumb_image_url + ")"
