@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
-
+import axios from 'axios'
 
 
 export default class Login extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+
+    this.state = {
+        email: "", 
+        password: ""
+    }
+  }
+  handleChange = (e) => {
+      this.setState({
+      [e.target.name]: e.target.value
+      })
+  }
+
+  handleSubmit = (e) => {
+      
   }
 
   render () {
@@ -13,9 +27,25 @@ export default class Login extends Component {
         <h1>LOGIN TO ACCESS YOUR DASHBOARD</h1>
 
 
-        <form>
-            <input type="text"/>
-            <input type="password"/>
+        <form onSubmit={this.handleSubmit}>
+            <input 
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={this.state.email}
+            onChange={this.handleChange}
+            />
+            <input 
+            type="password"
+            name="password"
+            placeholder="Your Password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            />
+            <div>
+                <button type="submit">Login</button>
+            </div>
+            
         </form>
     </div>)
   }
