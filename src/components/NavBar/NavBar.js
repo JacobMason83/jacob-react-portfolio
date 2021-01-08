@@ -1,13 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export default class NavBar extends Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
+const NavBar = (props) => {
+    
         
-        return (
+  return (
 <div className='nav-wrapper'>
   <div className='left-side'>
     <div className='nav-link-wrapper'>
@@ -32,4 +29,6 @@ export default class NavBar extends Component {
 
         )
     }
-}// using an ternary operator to show if the button is hidden or not
+
+    export default NavBar
+// using an ternary operator to show if the button is hidden or not
