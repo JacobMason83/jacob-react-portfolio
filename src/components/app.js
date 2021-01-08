@@ -18,7 +18,27 @@ import NoMatch from './pages/no-match'
 
 
 export default class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      loggedInStatus: "NOT_LOGGED_IN"
+  }
+  this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
+  this.handleUnSuccessfulLogin = this.handleUnSuccessfulLogin.bind(this);
+}
 
+
+handleSuccessfulLogin() {
+  this.setState({
+    loggedInStatus: "LOGGED_IN"
+  });
+}
+
+handleUnSuccessfulLogin() {
+  this.setState({
+    loggedInStatus: "NOT_LOGGED_IN"
+  });
+}
 
   render () {
     
@@ -31,11 +51,21 @@ export default class App extends Component {
             <Switch>
               {/* root route  */}
               <Route exact path='/' component={Home} />
-              <Route path='/auth' component={Auth} />
+              <Route
+                path="/auth"
+                render={props => (
+                  <Auth
+                    {...props}
+                    handleSuccessfulLogin={this.handleSuccessfulLogin}
+                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
+                  />
+                )}
+              />
               <Route path='/about-me' component={About} />
               <Route path='/contact' component={Contact} />
               <Route path='/blog' component={Blog} />
               <Route path='/portfolio:slug' component={PortfolioDetail} />
+              <Route path='/auth'
               <Route component={NoMatch} />
             </Switch>
           </div>
@@ -47,4 +77,5 @@ export default class App extends Component {
     )
   }
 }
+
 
