@@ -4,8 +4,19 @@ import Login from '../../auth/login.js'
 
 
 export default class Auth extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
+
+       
+    }
+
+    handleSuccessfulAuth = () => {
+        this.props.handleSuccessfulLogin()
+        this.props.history.push("/")
+    }
+    handleUnSuccessfulAuth = () => {
+        this.props.handleUnSuccessfulLogin()
+
     }
 
     render(){
@@ -17,7 +28,10 @@ export default class Auth extends Component {
              />
            
             <div className="right-column">
-               <Login /> 
+               <Login
+               handleSuccessfulAuth={this.handleSuccessfulAuth}
+               handleUnSuccessfulAuth={this.handleUnSuccessfulAuth}
+                /> 
             </div>
                 
             </div>
