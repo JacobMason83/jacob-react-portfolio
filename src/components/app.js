@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // component based imports go below library imports and have relative paths 
 
@@ -37,6 +37,43 @@ handleUnSuccessfulLogin = () => {
   this.setState({
     loggedInStatus: "NOT_LOGGED_IN"
   });
+}
+
+checkLoginStatus = () => {
+  return axios.get('https://api.devcamp.space/logged_in', { withCredentials: true})
+    .then(res => {
+      const loggedIn = res.data.logged_in
+      const loggedInStatus = this.state.loggedInStatus
+
+      //if loggedIn and status Logge_In => return data
+      // if loggedIn status Not_logged_in => updateState
+      // if not loggedIn and status Logged_in => update state
+
+
+      if(loggedIn && loggedInStatus === "LOGGED_IN") {
+         return loggedIn
+      } 
+      else if(loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
+        this.setState({
+          loggedInStatus: "LOGGED_IN"
+        })}
+         else {
+          this.setState({
+            loggedInStatus: "NOT_LOGGED_IN"  
+          })
+        }
+      
+      
+      
+    })
+    .catch((err) => {
+      console.log("Error", err)
+    })
+  }
+
+
+componentDidMount() {
+  this.checkLoginStatus()
 }
 
   render () {
