@@ -38,6 +38,11 @@ handleUnSuccessfulLogin = () => {
     loggedInStatus: "NOT_LOGGED_IN"
   });
 }
+handlesuccessfulLogout = () => {
+  this.setState({
+    loggedInStatus: "NOT_LOGGED_IN"
+  });
+}
 
 checkLoginStatus = () => {
   return axios.get('https://api.devcamp.space/logged_in', { withCredentials: true})
@@ -75,6 +80,9 @@ checkLoginStatus = () => {
 componentDidMount() {
   this.checkLoginStatus()
 }
+authorizedPages = () => {
+  return [<Route path='/blog' component={Blog} />  ]
+}
 
   render () {
     
@@ -83,7 +91,9 @@ componentDidMount() {
         <Router>
           <div>
           
-            <NavBar loggedInStatus={this.state.loggedInStatus} />
+            <NavBar loggedInStatus={this.state.loggedInStatus}
+            handlesuccessfulLogout={this.handlesuccessfulLogout}
+             />
             <h2>{this.state.loggedInStatus}</h2>
             <Switch>
               {/* root route  */}
@@ -100,7 +110,7 @@ componentDidMount() {
               />
               <Route path='/about-me' component={About} />
               <Route path='/contact' component={Contact} />
-              <Route path='/blog' component={Blog} />
+              {this.state.loggedInStatus === "LOGGED_IN" ? this.authorizedPages : null}
               <Route path='/portfolio:slug' component={PortfolioDetail} />
               
               <Route component={NoMatch} />
