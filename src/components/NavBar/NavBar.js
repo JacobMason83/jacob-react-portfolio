@@ -1,5 +1,6 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import axios from 'axios'
+import { NavLink, withRouter } from 'react-router-dom'
 
 const NavBar = (props) => {
     const dynamicLink = (route, linkText) => {
@@ -9,7 +10,18 @@ const NavBar = (props) => {
       </div>
 
       )
-    }
+      }
+      const handleSignout = () => {
+        axios.delete("https://api.devcamp.space/logout", {withCredentials: true})
+        .then(res => {
+          if(res.status === 200){
+            props.history.push("/")
+            props.handleSuccessfulLogout()
+          }
+          return res.data
+        })
+        .catch(err => console.error(err))
+      }
         
   return (
 <div className='nav-wrapper'>
@@ -29,11 +41,14 @@ const NavBar = (props) => {
 
     
   </div>
-  <div className='right-side'>JACOB MASON</div>
+  <div className='right-side'>JACOB MASON
+  {props.loggedInStatus ==="LOGGED_IN" ? (<a onClick={handleSignout}>Sign Out</a>) : null}
+  </div>
 </div>
 
         )
     }
+  
 
-    export default NavBar
-// using an ternary operator to show if the button is hidden or not
+    export default withRouter(NavBar) 
+// exporting with router will make use of the higherorder component to allow it to be definined and not definied

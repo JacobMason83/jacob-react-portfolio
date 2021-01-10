@@ -38,7 +38,7 @@ handleUnSuccessfulLogin = () => {
     loggedInStatus: "NOT_LOGGED_IN"
   });
 }
-handlesuccessfulLogout = () => {
+handleSuccessfulLogout = () => {
   this.setState({
     loggedInStatus: "NOT_LOGGED_IN"
   });
@@ -92,7 +92,7 @@ authorizedPages = () => {
           <div>
           
             <NavBar loggedInStatus={this.state.loggedInStatus}
-            handlesuccessfulLogout={this.handlesuccessfulLogout}
+            handleSuccessfulLogout={this.handleSuccessfulLogout}
              />
             <h2>{this.state.loggedInStatus}</h2>
             <Switch>
