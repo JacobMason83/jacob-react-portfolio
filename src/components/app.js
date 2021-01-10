@@ -83,7 +83,7 @@ componentDidMount() {
         <Router>
           <div>
           
-            <NavBar />
+            <NavBar loggedInStatus={this.state.loggedInStatus} />
             <h2>{this.state.loggedInStatus}</h2>
             <Switch>
               {/* root route  */}
