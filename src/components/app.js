@@ -8,7 +8,7 @@ import Home from './pages/home'
 import About from './pages/about'
 import Contact from './pages/contact'
 import Blog from './pages/blog'
-import PortfolioManger from './pages/portfolio-manager'
+import PortfolioManager from './pages/portfolio-manager'
 import PortfolioDetail from './portfolio/portfolio-detail'
 import Auth from './pages/auth'
 import NoMatch from './pages/no-match'
@@ -82,7 +82,7 @@ componentDidMount() {
   this.checkLoginStatus()
 }
 authorizedPages = () => {
-  return [ <Route path='/portfolio-mangager' component={PortfolioManger} />]
+  return [ <Route path='/portfolio-manager' component={PortfolioManager} />]
 }
 
   render () {
@@ -112,7 +112,7 @@ authorizedPages = () => {
               <Route path='/about-me' component={About} />
               <Route path='/contact' component={Contact} />              
               <Route path='/blog' component={Blog} /> 
-              {this.state.loggedInStatus === "LOGGED_IN" ? this.authorizedPages : null}
+              {this.state.loggedInStatus === "LOGGED_IN" ? this.authorizedPages() : null}
               <Route path='/portfolio:slug' component={PortfolioDetail} />
               
               <Route component={NoMatch} />
