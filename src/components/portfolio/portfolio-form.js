@@ -16,8 +16,11 @@ export default class PortfolioForm extends Component {
             position: "",
             thumb_image: "",
             banner_image: "",
-            logo_image: ""
+            logo: ""
         }
+        this.thumbRef = React.createRef()
+        this.bannerRef = React.createRef()
+        this.logoRef = React.createRef()
         
     }
 
@@ -25,6 +28,20 @@ export default class PortfolioForm extends Component {
         return {
             addedfile: file => this.setState({                
                 thumb_image: file})
+        }
+    }
+    handleBannerDrop = () => {
+        return {
+            addedfile: file => this.setState({
+                banner_image: file
+            })
+        }
+    }
+    handleLogoDrop = () => {
+        return {
+            addedfile: file => this.setState({
+                logo: file
+            })
         }
     }
 
@@ -56,6 +73,13 @@ export default class PortfolioForm extends Component {
         if(this.state.thumb_image) {
         formData.append("portfolio_item[thumb_image]", this.state.thumb_image)
         } 
+        if(this.state.banner_image) {
+        formData.append("portfolio_item[banner_image]", this.state.banner_image)
+        } 
+        if(this.state.logo) {
+        formData.append("portfolio_item[logo]", this.state.logo)
+        } 
+        
         return formData
     }
 
@@ -65,6 +89,7 @@ export default class PortfolioForm extends Component {
         })
     }
     handleSubmit = (event) => {
+        event.preventDefault()
      
         axios.post(
         "https://jacobmason.devcamp.space/portfolio/portfolio_items", 
@@ -72,12 +97,24 @@ export default class PortfolioForm extends Component {
         { withCredentials:true}
         )
         .then(res => {
-            this.props.handleSuccessfulFormSubmission(res.data.portfolio_items)
+            this.props.handleSuccessfulFormSubmission(res.data.portfolio_item)
+            this.setState({
+                name: "",
+                description: "",
+                url: "",
+                category:"School",
+                position: "",
+                thumb_image: "",
+                banner_image: "",
+                logo: ""
+            })
+            [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
+                ref.current.dropzone.removeAllFiles()
+            })
         })
         .catch(err => {console.log("HandleSubmit Error", err)})          
         
         
-        e.preventDefault()
         
     }
   
@@ -88,7 +125,7 @@ export default class PortfolioForm extends Component {
       return(
    <div> 
         <h1>Portfolio Form</h1>
-    <form onSubmit={this.handleSubmit}>
+    <form onSubmit={this.handleSubmit} className="portfolio-form-wrapper">
     <div>
         
         <input 
@@ -137,9 +174,22 @@ export default class PortfolioForm extends Component {
         </div>
         <div className="image-uploaders" >
         <DropzoneComponent 
+        ref={this.thumbRef}
         config={this.componentConfig()}
         djsConfig={this.djsConfig()}
         eventHandlers={this.handleThumbDrop()}
+        />
+        <DropzoneComponent 
+        ref={this.bannerRef}
+        config={this.componentConfig()}
+        djsConfig={this.djsConfig()}
+        eventHandlers={this.handleBannerDrop()}
+        />
+        <DropzoneComponent 
+        ref={this.logoRef}
+        config={this.componentConfig()}
+        djsConfig={this.djsConfig()}
+        eventHandlers={this.handleLogoDrop()}
         />
         </div>
         <div>
