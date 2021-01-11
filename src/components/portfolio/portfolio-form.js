@@ -10,7 +10,7 @@ export default class PortfolioForm extends Component {
             description: "",
             url: "",
             category:"",
-            position: 1,
+            position: "",
             thumb_image: "",
             banner_image: "",
             logo_image: ""
@@ -25,7 +25,7 @@ export default class PortfolioForm extends Component {
         formData.append("portfolio_item[url]", this.state.url)
         formData.append("portfolio_item[category]", this.state.category)
         formData.append("portfolio_item[position]", this.state.position)
-        
+        return formData
     }
 
     handleChange = (e) => {
@@ -37,7 +37,7 @@ export default class PortfolioForm extends Component {
         //https://jacobmason.devcamp.space/portfolio/portfolio_items
         axios.post(
         "https://jacobmason.devcamp.space/portfolio/portfolio_items", 
-        this.buildForm,
+        this.buildForm(),
         { withCredentials:true}
         )
         .then(res => {
@@ -84,13 +84,17 @@ export default class PortfolioForm extends Component {
             value={this.state.position}
             onChange={this.handleChange}
         />
-        <input 
-            type="textarea"
-            name="category"
-            placeholder="Category"
-            value={this.state.category}
-            onChange={this.handleChange}
-        />
+              <select
+               name='category'
+               value={this.state.category}
+               onChange={this.handleChange}
+              >
+              <option value='School'>School</option>
+              <option value='MyProjects'>MyProjects</option>
+              <option value='InClass'>InClass</option>
+              <option value='BeforeSchool'>BeforeSchool</option>
+             </select>
+
         </div>
         <div>
         <input 
