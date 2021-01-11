@@ -82,7 +82,7 @@ componentDidMount() {
   this.checkLoginStatus()
 }
 authorizedPages = () => {
-  return [ <Route path='/portfolio-manager' component={PortfolioManager} />]
+  return [ <Route key="portfolio-manager" path='/portfolio-manager' component={PortfolioManager} />]
 }
 
   render () {
