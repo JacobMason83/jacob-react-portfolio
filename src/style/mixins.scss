@@ -38,3 +38,8 @@
         border-bottom: 1px solid $dark-teal;
     }
 }
+@mixin base-grid {
+    display: grid;
+    grid-gap:21px;
+    
+}
