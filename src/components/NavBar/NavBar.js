@@ -44,7 +44,7 @@ const NavBar = (props) => {
 
     
   </div>
-  <div className='right-side'>JACOB MASON
+  <div className='right-side'>JACOB MASON
   {props.loggedInStatus ==="LOGGED_IN" ? (<a onClick={handleSignout}>Sign Out</a>) : null}
   </div>
 </div>
