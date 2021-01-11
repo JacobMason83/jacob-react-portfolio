@@ -108,7 +108,8 @@ export default class PortfolioForm extends Component {
                 banner_image: "",
                 logo: ""
             })
-            [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
+            const myRef = [this.thumbRef, this.bannerRef, this.logoRef]
+            myRef.forEach(ref => {
                 ref.current.dropzone.removeAllFiles()
             })
         })
