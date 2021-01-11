@@ -9,7 +9,7 @@ export default class PortfolioForm extends Component {
             name: "",
             description: "",
             url: "",
-            category:"",
+            category:"School",
             position: "",
             thumb_image: "",
             banner_image: "",
