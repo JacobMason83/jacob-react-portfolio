@@ -15,7 +15,7 @@ export default class PortfolioManager extends Component {
 
   getPortfolioItems = () => {
      axios
-     .get('https://jacobmason.devcamp.space/portfolio/portfolio_items', {withCredentials: true})
+     .get('https://jacobmason.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc', {withCredentials: true})
      .then(res => {
         this.setState({
            portfolioItems: [...res.data.portfolio_items]
@@ -29,6 +29,9 @@ export default class PortfolioManager extends Component {
   handleSuccessfulFormSubmission = (portfolioItem) => {
      //todo
      //update the portfolio itmes state
+     this.setState({
+        portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
+     })
      //and portfolioitem to the list 
   }
 
