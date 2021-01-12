@@ -132,7 +132,11 @@ export default class PortfolioForm extends Component {
             withCredentials: true
         })
         .then(res => {
-            this.props.handleSuccessfulFormSubmission(res.data.portfolio_item)
+            if(this.state.editMode) {
+                this.props.handleEditFormSubmission()
+            } else {
+            this.props.handleNewFormSubmission(res.data.portfolio_item)
+            }
             this.setState({
                 name: "",
                 description: "",
@@ -141,7 +145,10 @@ export default class PortfolioForm extends Component {
                 position: "",
                 thumb_image: "",
                 banner_image: "",
-                logo: ""
+                logo: "",
+                editMode: false,
+                apiUrl: "https://jacobmason.devcamp.space/portfolio/portfolio_items",
+                apiAction: "post"
             })
             const myRef = [this.thumbRef, this.bannerRef, this.logoRef]
             myRef.forEach(ref => {
