@@ -16,7 +16,10 @@ export default class PortfolioForm extends Component {
             position: "",
             thumb_image: "",
             banner_image: "",
-            logo: ""
+            logo: "",
+            editMode: false,
+            apiUrl: "https://jacobmason.devcamp.space/portfolio/portfolio_items",
+            apiAction: "post"
         }
         this.thumbRef = React.createRef()
         this.bannerRef = React.createRef()
@@ -45,6 +48,9 @@ export default class PortfolioForm extends Component {
                 url: url || "",
                 category:category ||"School",
                 position: position,
+                editMode: true,
+                apiUrl: `https://jacobmason.devcamp.space/portfolio/portfolio_items/${id}`,
+                apiAction: "patch"
                 // thumb_image: thumb_image_url,
                 // banner_image: banner_image_url,
                 // logo: logo_image_url || ""
@@ -119,11 +125,12 @@ export default class PortfolioForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
      
-        axios.post(
-        "https://jacobmason.devcamp.space/portfolio/portfolio_items", 
-        this.buildForm(),
-        { withCredentials:true}
-        )
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            data: this.buildForm(),
+            withCredentials: true
+        })
         .then(res => {
             this.props.handleSuccessfulFormSubmission(res.data.portfolio_item)
             this.setState({
