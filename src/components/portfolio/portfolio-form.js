@@ -3,6 +3,7 @@ import axios from 'axios'
 import DropzoneComponent from 'react-dropzone-component'
 import "../../../node_modules/react-dropzone-component/styles/filepicker.css"
 import "../../../node_modules/dropzone/dist/min/dropzone.min.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default class PortfolioForm extends Component {
@@ -27,7 +28,16 @@ export default class PortfolioForm extends Component {
         
     }
     deleteImage = (imageType) => {
-
+        axios
+        .delete(`https://api.devcamp.space/portfolio/delete-portfolio-image/
+        ${this.state.id}?image_type=${imageType}`,
+         {withCredentials: true})
+         .then(res => {
+             this.setState({
+                 [`${imageType}_url`]: ""
+             })
+         })
+         .catch(err => console.error(err))
     }
     componentDidUpdate() {
         if(Object.keys(this.props.portfolioToEdit).length > 0){
@@ -226,7 +236,7 @@ export default class PortfolioForm extends Component {
     <div className='portfolio-manager-image-wrapper'>
       <img src={this.state.thumb_image_url} />
       <div className="image-removal-link">
-          <a onClick={() => this.deleteImage("thumb_image_url")}>Remove File</a>
+          <a onClick={() => this.deleteImage("thumb_image")}><FontAwesomeIcon icon="eraser"/></a>
       </div>
     </div>
   ) : (
@@ -247,7 +257,7 @@ export default class PortfolioForm extends Component {
     <div className='portfolio-manager-image-wrapper'>
       <img src={this.state.banner_image_url} />
       <div className="image-removal-link">
-          <a onClick={() => this.deleteImage("banner_image_url")}> Remove File </a>
+          <a onClick={() => this.deleteImage("banner_image")}><FontAwesomeIcon icon="eraser"/> </a>
       </div>
     </div>
   ) : (
@@ -268,7 +278,7 @@ export default class PortfolioForm extends Component {
     <div className='portfolio-manager-image-wrapper'>
       <img src={this.state.logo_url} />
       <div className="image-removal-link">
-          <a onClick={() => this.deleteImage("logo_url")}>Remove File</a>
+          <a onClick={() => this.deleteImage("logo")}><FontAwesomeIcon icon="eraser"/></a>
       </div>
     </div>
   ) : (
