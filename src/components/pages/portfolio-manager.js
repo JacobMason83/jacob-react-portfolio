@@ -9,7 +9,8 @@ export default class PortfolioManager extends Component {
   constructor () {
     super()
     this.state = {
-       portfolioItems: []
+       portfolioItems: [],
+       portfolioToEdit: {}
     }
   }
 
@@ -38,8 +39,12 @@ export default class PortfolioManager extends Component {
      }) .catch(err => console.error("an error occured", err))
      
   }
-  handleSuccessfulFormSubmission = (portfolioItem) => {
-  
+  handleEditclick = (portfolioItem) => {
+     this.setState({
+        portfolioToEdit: portfolioItem
+     })
+  }
+  handleSuccessfulFormSubmission = (portfolioItem) => {  
      this.setState({
         portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
      })
@@ -64,6 +69,7 @@ export default class PortfolioManager extends Component {
         
       <PortfolioSideBarList  data={this.state.portfolioItems}
          handleDeleteClick={this.handleDeleteClick}
+         handleEditclick={this.handleEditclick}
       />
       </div>
       </div>

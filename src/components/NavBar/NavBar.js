@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { NavLink, withRouter } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const NavBar = (props) => {
     const dynamicLink = (route, linkText) => {
@@ -44,8 +45,8 @@ const NavBar = (props) => {
 
     
   </div>
-  <div className='right-side'>JACOB MASON
-  {props.loggedInStatus ==="LOGGED_IN" ? (<a onClick={handleSignout}>Sign Out</a>) : null}
+  <div className='right-side'>JACOB MASON  
+  {props.loggedInStatus ==="LOGGED_IN" ? (<a onClick={handleSignout}><FontAwesomeIcon icon="sign-out-alt" /></a>) : null}
   </div>
 </div>
 
