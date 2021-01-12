@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
  export default class Blog extends Component {
      constructor(){
@@ -24,13 +23,16 @@ import axios from 'axios'
      }
     
     render() {
+        const blogRecords = this.state.blogItems.map(blogItem => {
+            return (<h1>{blogItem.title}</h1>)
+        })
     return(
         <div>Blog
         <h2>Blog</h2>
 
         <div>
-            <Link to='/about-me'> Read more about myself </Link>
-            
+           
+            {blogRecords}
             </div>
         </div>
     )
