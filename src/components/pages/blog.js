@@ -30,7 +30,10 @@ import BlogItem from '../blog/blog-item'
             return <BlogItem key={blogItem.id} blogItem={blogItem}/>
         })
 
-        return <div>{blogRecords}</div>
+        return( <div className="blog-container">
+        <div className="content-container">{blogRecords}</div>
+      </div>
+        )
     }
     
 }
