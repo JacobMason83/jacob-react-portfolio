@@ -3,21 +3,29 @@ import axios from 'axios'
 import BlogItem from '../blog/blog-item'
 
 
+
  export default class Blog extends Component {
      constructor(){
          super()
 
          this.state ={
-             blogItems: []
+             blogItems: [],
+             totalCount: 0,
+             currentPage: 0
          }
          this.activateInfiniteScroll()
      }
      getBlogItems = () => {
+         this.setState({
+             currentPage: this.state.currentPage + 1
+         })
          axios
          .get('https://jacobmason.devcamp.space/portfolio/portfolio_blogs', {withCredentials: true})
          .then(res => {
+             
              this.setState({
-                 blogItems: res.data.portfolio_blogs
+                 blogItems: res.data.portfolio_blogs,
+                 totalCount: res.data.meta.total_records
              })
          })
          .catch(err => console.error(err))
