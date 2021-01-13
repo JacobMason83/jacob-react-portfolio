@@ -12,7 +12,7 @@ export default class BlogModal extends Component {
 
    render() {
      return (
-        <ReactModal isOpen={true}>
+        <ReactModal isOpen={this.props.blogModalIsOpen}>
             <h1>Hi im a modal</h1>
         </ReactModal>
    )
