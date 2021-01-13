@@ -5,14 +5,16 @@ import ReactModal from 'react-modal'
 
 export default class BlogModal extends Component {
 
-   constructor() {
-     super()
+   constructor(props) {
+     super(props)
 
    }
 
    render() {
      return (
-        <ReactModal isOpen={this.props.blogModalIsOpen}>
+        <ReactModal 
+        onRequestClose={()=> this.props.handleModalClose()} 
+        isOpen={this.props.blogModalIsOpen}>
             <h1>Hi im a modal</h1>
         </ReactModal>
    )

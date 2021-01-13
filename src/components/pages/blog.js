@@ -40,6 +40,11 @@ class Blog extends Component {
         this.getBlogItems()
     }
   }
+  handleModalClose = () => {
+    this.setState({
+      blogModalIsOpen: false
+    })
+  }
 
   getBlogItems () {
     this.setState({
@@ -85,7 +90,9 @@ class Blog extends Component {
 
     return (
       <div className='blog-container'>
-      <BlogModal blogModalIsOpen={this.state.blogModalIsOpen} />
+      <BlogModal
+        handleModalClose={this.handleModalClose}
+       blogModalIsOpen={this.state.blogModalIsOpen} />
       <div className="new-blog-link">
         <a onClick={this.handleNewBlogClick}>Open Modal</a>
       </div>
