@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import BlogItem from '../blog/blog-item'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
@@ -11,7 +12,8 @@ import BlogItem from '../blog/blog-item'
          this.state ={
              blogItems: [],
              totalCount: 0,
-             currentPage: 0
+             currentPage: 0,
+             isLoading: true
          }
          this.activateInfiniteScroll()
      }
@@ -25,7 +27,8 @@ import BlogItem from '../blog/blog-item'
              
              this.setState({
                  blogItems: res.data.portfolio_blogs,
-                 totalCount: res.data.meta.total_records
+                 totalCount: res.data.meta.total_records,
+                 isLoading:false
              })
          })
          .catch(err => console.error(err))
@@ -43,14 +46,27 @@ import BlogItem from '../blog/blog-item'
      componentWillMount() {
          this.getBlogItems()
      }
+     clearIsLoading = () => {
+         this.setState({
+             isLoading: false
+         })
+     }
+     componentWillUnmount() {
+         this.clearIsLoading()
+     }
     
     render() {
         const blogRecords = this.state.blogItems.map(blogItem => {
             return <BlogItem key={blogItem.id} blogItem={blogItem}/>
         })
 
-        return( <div className="blog-container">
+        return( 
+        <div className="blog-container">
         <div className="content-container">{blogRecords}</div>
+        {this.state.isLoading ? (
+        <div className="content-loader"><FontAwesomeIcon icon="spinner" spin /></div>
+        ) : null}
+        
       </div>
         )
     }

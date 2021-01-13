@@ -3,9 +3,9 @@ import axios from 'axios'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon, FortAwesomIcon } from '@fortawesome/react-fontawesome'
-import {faTrash, faSignOutAlt, faEdit, faEraser} from '@fortawesome/free-solid-svg-icons'
+import {faTrash, faSignOutAlt, faEdit, faEraser, faSpinner} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTrash, faSignOutAlt, faEdit, faEraser  )
+library.add(faTrash, faSignOutAlt, faEdit, faEraser, faSpinner  )
 // component based imports go below library imports and have relative paths 
 import NavBar from './NavBar/NavBar'
 import Home from './pages/home'
