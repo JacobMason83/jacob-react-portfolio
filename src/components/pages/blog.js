@@ -10,6 +10,7 @@ import BlogItem from '../blog/blog-item'
          this.state ={
              blogItems: []
          }
+         this.activateInfiniteScroll()
      }
      getBlogItems = () => {
          axios
@@ -20,6 +21,11 @@ import BlogItem from '../blog/blog-item'
              })
          })
          .catch(err => console.error(err))
+     }
+     activateInfiniteScroll = () => {
+         window.onscroll =() => {
+             console.log('scroll')
+         }
      }
      componentWillMount() {
          this.getBlogItems()
