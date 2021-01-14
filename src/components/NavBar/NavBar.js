@@ -31,7 +31,7 @@ const NavBar = (props) => {
       <NavLink exact to='/' activeClassName='nav-link-active'>
         Home
       </NavLink>
-    </div>
+    </div> 
     <div className='nav-link-wrapper' >
       <NavLink to='about-me' activeClassName='nav-link-active'>About</NavLink>
     </div>

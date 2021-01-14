@@ -20,8 +20,7 @@ export default class BlogForm extends Component {
       .post("https://jacobmason.devcamp.space/portfolio/portfolio_blogs",
        this.buildForm(), 
        { withCredentials: true })
-      .then(res => {
-        
+      .then(res => {        
             this.props.handleSuccessfullFormSubmission(
               res.data.portfolio_blog
             )
@@ -39,7 +38,9 @@ export default class BlogForm extends Component {
   }
   render () {
     return(
-    <form onSubmit={this.handleSubmit}>
+    <form onSubmit={this.handleSubmit} className="blog-form-wrapper">
+    <div className="two-column">
+    
       <input type='text'
       name="title"
       placeholder="Blog Title"
@@ -52,9 +53,11 @@ export default class BlogForm extends Component {
       placeholder="Blog Status"
        onChange={this.handleChange}
        value={this.state.blog_status} />
+      </div>
       
-
-      <button type='submit'>save</button>
+      <div className="one-column">
+      <button type='submit' className="btn">save</button>
+      </div>
     </form>
     )
   }
