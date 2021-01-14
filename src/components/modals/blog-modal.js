@@ -26,8 +26,8 @@ export default class BlogModal extends Component {
      }
 
    }
-   handleSuccessfulFormSubmission = () => {
-     console.log("handleSuccesfulFormSubmission works from blog form")
+   handleSuccessfulFormSubmission = (blog) => {
+     console.log("handleSuccesfulFormSubmission works from blog form", blog)
    }
 
    render() {
