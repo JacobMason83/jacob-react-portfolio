@@ -26,6 +26,9 @@ export default class BlogModal extends Component {
      }
 
    }
+   handleSuccessfulFormSubmission = () => {
+     console.log("handleSuccesfulFormSubmission works from blog form")
+   }
 
    render() {
      return (
@@ -33,7 +36,7 @@ export default class BlogModal extends Component {
         style={this.customStyles}
         onRequestClose={()=> this.props.handleModalClose()} 
         isOpen={this.props.blogModalIsOpen}>
-        <BlogForm />
+        <BlogForm handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission} />
             <h1>Hi im a modal</h1>
         </ReactModal>
    )
