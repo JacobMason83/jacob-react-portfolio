@@ -100,9 +100,11 @@ class Blog extends Component {
        handleSuccessfulNewBlogSubmission={this.handleSuccessfulNewBlogSubmission }
         handleModalClose={this.handleModalClose}
        blogModalIsOpen={this.state.blogModalIsOpen} />
+       {this.props.loggedInStatus ? (
       <div className="new-blog-link">
         <a onClick={this.handleNewBlogClick}><FontAwesomeIcon icon="plus-circle" /></a>
       </div>
+       ) : null }
         <div className='content-container'>{blogRecords}</div>
 
         {this.state.isLoading ? (
