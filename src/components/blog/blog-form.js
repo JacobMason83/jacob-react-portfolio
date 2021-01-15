@@ -26,7 +26,8 @@ export default class BlogForm extends Component {
       .post("https://jacobmason.devcamp.space/portfolio/portfolio_blogs",
        this.buildForm(), 
        { withCredentials: true })
-      .then(res => {        
+      .then(res => {
+                 
             this.props.handleSuccessfullFormSubmission(
               res.data.portfolio_blog
             )
