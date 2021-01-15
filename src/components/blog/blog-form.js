@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import DropzoneComponent from 'react-dropzone-component'
 import RichTextEditor from '../forms/rich-text-editor'
 
 export default class BlogForm extends Component {
@@ -8,7 +9,29 @@ export default class BlogForm extends Component {
     this.state = {
         title: "", 
         blog_status: "",
-        content: ""
+        content: "",
+        featured_image: ""
+    }
+    this.featureRef = React.createRef()
+  }
+  componentConfig = () => {
+    return {
+      iconFiletypes: [".jpg", ".png"],
+      showFiletypeIcon: true,
+      postUrl: "https://httpbin.org/post"
+    }
+  }
+  djsConfig = () => {
+    return {
+      addRemoveLinks: true,
+      maxFiles: 1
+    }
+  }
+  handleFeaturedImageDrop = () => {
+    return {
+      addedFile: file => this.setState({
+        featured_image: file
+      })
     }
   }
   handleRichTextEditorChange = (content) => {
@@ -27,7 +50,9 @@ export default class BlogForm extends Component {
        this.buildForm(), 
        { withCredentials: true })
       .then(res => {
-                 
+            if(this.state.featured_image){
+              this.featureRef.current.dropzone.removeAllFiles()
+            }   
             this.props.handleSuccessfullFormSubmission(
               res.data.portfolio_blog
             )
@@ -42,6 +67,9 @@ export default class BlogForm extends Component {
       formData.append("portfolio_blog[blog_status]", this.state.blog_status)
       formData.append("portfolio_blog[content]", this.state.content)
 
+     
+      formData.append("portfolio_blog[featured_image_url]", this.state.featured_image)
+      
       return formData
   }
   render () {
@@ -69,6 +97,16 @@ export default class BlogForm extends Component {
        />
 
       </div>
+      <div className="image-uploaders">
+  <DropzoneComponent
+    ref={this.featureRef}
+    config={this.componentConfig()}
+    djsConfig={this.djsConfig()}
+    eventHandlers={this.handleFeaturedImageDrop()}
+  >
+    <div className="dz-message">Featured Image</div>
+  </DropzoneComponent>
+</div>
       
 
       <button type='submit' className="btn">save</button>
