@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { library } from '@fortawesome/fontawesome-svg-core'
-// import { FontAwesomeIcon, FortAwesomIcon } from '@fortawesome/react-fontawesome'
-import {faTrash, faSignOutAlt, faEdit, faEraser, faSpinner, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTrash, faSignOutAlt, faEdit, faEraser, faSpinner, faPlusCircle)
 // component based imports go below library imports and have relative paths 
 import NavBar from './NavBar/NavBar'
 import Home from './pages/home'
@@ -17,6 +13,7 @@ import PortfolioManager from './pages/portfolio-manager'
 import PortfolioDetail from './portfolio/portfolio-detail'
 import Auth from './pages/auth'
 import NoMatch from './pages/no-match'
+import Icons from '../helpers/icons'
 
 
 
@@ -26,6 +23,8 @@ import NoMatch from './pages/no-match'
 export default class App extends Component {
   constructor(){
     super()
+
+    Icons()
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN"
   }
