@@ -71,25 +71,27 @@ class Blog extends Component {
       })
   }
   handleSuccessfulNewBlogSubmission = (blog) => {
+    console.log(blog)
     this.setState({
       blogModalIsOpen: false,
       blogItems: [blog].concat(this.state.blogItems)
     });
   }
+
   handleNewBlogClick = () => {
     this.setState({
       blogModalIsOpen: true
     })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.getBlogItems()
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll, false)
   }
 
-  render () {
+  render() {
     const blogRecords = this.state.blogItems.map(blogItem => {
       return <BlogItem key={blogItem.id} blogItem={blogItem} />
     })
@@ -97,7 +99,7 @@ class Blog extends Component {
     return (
       <div className='blog-container'>
       <BlogModal
-       handleSuccessfulNewBlogSubmission={this.handleSuccessfulNewBlogSubmission }
+       handleSuccessfulNewBlogSubmission={this.handleSuccessfulNewBlogSubmission}
         handleModalClose={this.handleModalClose}
        blogModalIsOpen={this.state.blogModalIsOpen} />
        {this.props.loggedInStatus ? (

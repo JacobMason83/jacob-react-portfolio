@@ -1,19 +1,32 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import axios from 'axios'
 import DropzoneComponent from 'react-dropzone-component'
 import RichTextEditor from '../forms/rich-text-editor'
 
 export default class BlogForm extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+
     this.state = {
+        id:"",
         title: "", 
         blog_status: "",
         content: "",
         featured_image: ""
     }
-    this.featureRef = React.createRef()
+    this.featuredImageRef = createRef()
   }
+
+  componentDidMount() {
+    if(this.props.editMode) {
+      this.setState({
+        id: this.props.blog.id,
+        title: this.props.blog.title,
+        status: this.props.blog.status
+      })
+    }
+  }
+
   componentConfig = () => {
     return {
       iconFiletypes: [".jpg", ".png"],
@@ -21,19 +34,22 @@ export default class BlogForm extends Component {
       postUrl: "https://httpbin.org/post"
     }
   }
+
   djsConfig = () => {
     return {
       addRemoveLinks: true,
       maxFiles: 1
     }
   }
+
   handleFeaturedImageDrop = () => {
     return {
-      addedFile: file => this.setState({
+      addedfile: file => this.setState({
         featured_image: file
       })
     }
   }
+
   handleRichTextEditorChange = (content) => {
     this.setState({content})
   }
@@ -43,23 +59,26 @@ export default class BlogForm extends Component {
           [e.target.name]: e.target.value
       })
   }
+
   handleSubmit = (e) => {
       e.preventDefault()
+
       axios
       .post("https://jacobmason.devcamp.space/portfolio/portfolio_blogs",
        this.buildForm(), 
        { withCredentials: true })
       .then(res => {
-            if(this.state.featured_image){
-              this.featureRef.current.dropzone.removeAllFiles()
-            }   
-            this.props.handleSuccessfullFormSubmission(
-              res.data.portfolio_blog
-            )
+        
+        if(this.state.featured_image){
+          this.featuredImageRef.current.dropzone.removeAllFiles()
+        }   
+
+        this.props.handleSuccessfullFormSubmission(res.data.portfolio_blog);
       })
       .catch(err => console.error("error from handlesubmit blog-form", err))
      
   }
+
   buildForm = () => {
       let formData = new FormData()
 
@@ -67,9 +86,10 @@ export default class BlogForm extends Component {
       formData.append("portfolio_blog[blog_status]", this.state.blog_status)
       formData.append("portfolio_blog[content]", this.state.content)
 
-     
-      formData.append("portfolio_blog[featured_image_url]", this.state.featured_image)
-      
+      if(this.state.featured_image){
+      formData.append("portfolio_blog[featured_image]", this.state.featured_image)
+      }
+
       return formData
   }
   render () {
@@ -94,12 +114,14 @@ export default class BlogForm extends Component {
       <div className="one-column">
       <RichTextEditor
       handleRichTextEditorChange={this.handleRichTextEditorChange}
+      editMode={this.props.editMode}
+      contentToEdit={this.props.editMode && this.props.blog.content ? this.props.blog.content : null}
        />
 
       </div>
       <div className="image-uploaders">
   <DropzoneComponent
-    ref={this.featureRef}
+    ref={this.featuredImageRef}
     config={this.componentConfig()}
     djsConfig={this.djsConfig()}
     eventHandlers={this.handleFeaturedImageDrop()}

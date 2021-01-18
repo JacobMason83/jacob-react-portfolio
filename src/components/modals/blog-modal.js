@@ -7,7 +7,7 @@ ReactModal.setAppElement(".app-wrapper");
 
 export default class BlogModal extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.customStyles = {
       content: {

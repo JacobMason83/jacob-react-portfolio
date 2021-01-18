@@ -17,7 +17,7 @@
             &:hover {
                 color: $dark-teal;
             }
-}
+            }
     }
     
     .content-container {
@@ -31,10 +31,11 @@
             &:hover {
                 color: $dark-teal
             }
+        }
         h1 {
             font-size: 1.5em;
-        }
-}
+            }
+
         .featured-image-wrapper{
             img {
                 margin: 15px 0px;
@@ -42,7 +43,7 @@
                 height: 350px;
                 border-radius: 5px;                
                 object-fit: cover;
-}
+            }
         }
     }
 }
