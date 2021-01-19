@@ -83,8 +83,21 @@ class Blog extends Component {
       blogModalIsOpen: true
     })
   }
+  handleDeleteClick = (blog) => {
+    axios
+    .delete(`https://api.devcamp.space/portfolio/portfolio_blogs/${blog.id}`, {withCredentials: true})
+    .then(res => { 
+      this.setState({
+        blogItems: this.state.blogItems.filter(blogItem => {
+          return blog.id !== blogItem.id
+        })
+      })
+      return res.data
+    })
+    .catch(err => console.error(err))
+  }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getBlogItems()
   }
   componentWillUnmount() {
@@ -93,7 +106,16 @@ class Blog extends Component {
 
   render() {
     const blogRecords = this.state.blogItems.map(blogItem => {
-      return <BlogItem key={blogItem.id} blogItem={blogItem} />
+      if(this.props.loggedInStatus === "LOGGED_IN"){
+        return (
+          <div className="admin-blog-wrapper" key={blogItem.id}>
+           <BlogItem  blogItem={blogItem} />
+           <a onClick={() => this.handleDeleteClick(blogItem)}><FontAwesomeIcon icon="trash" /></a>
+          </div>
+        )
+      } else {        
+        return <BlogItem key={blogItem.id} blogItem={blogItem} />
+      }
     })
 
     return (
