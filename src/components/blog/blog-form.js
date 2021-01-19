@@ -92,6 +92,16 @@ export default class BlogForm extends Component {
 
       return formData
   }
+  deleteImage = (imageType) => {
+    axios
+    .delete(`https://api.devcamp.space/portfolio/delete-portfolio-blog-image/
+    ${this.props.blog.id}?image_type=${imageType}`,
+     {withCredentials: true})
+     .then(res => {
+        this.props.handleFeaturedImageDelete()
+     })
+     .catch(err => console.error(err))
+}
   render () {
     return(
     <form onSubmit={this.handleSubmit} className="blog-form-wrapper">
@@ -125,7 +135,7 @@ export default class BlogForm extends Component {
               <img src={this.props.blog.featured_image_url} />
 
               <div className="image-removal-link">
-                <a>Remove file</a>
+                <a onClick={()=> this.deleteImage('featured_image')}>Remove file</a>
               </div>
             </div>
           ) : (

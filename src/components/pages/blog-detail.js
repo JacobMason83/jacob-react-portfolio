@@ -13,6 +13,13 @@ export default class BlogDetail extends Component {
       editMode: false
     }
   }
+  handleFeaturedImageDelete =() => {
+    this.setState({
+      blogItem: {
+        featured_image_url: ""
+      }
+    })
+  }
   handleEditClick = () => {
     console.log("from handleEditClick")
     this.setState({
@@ -49,7 +56,7 @@ export default class BlogDetail extends Component {
 
     const contentManager = () => {
       if(this.state.editMode){
-        return <BlogForm editMode={this.state.editMode} blog={this.state.blogItem}  />
+        return <BlogForm editMode={this.state.editMode} blog={this.state.blogItem} handleFeaturedImageDelete={this.handleFeaturedImageDelete} />
       } else{
         return (
           <div className='content-container'>
