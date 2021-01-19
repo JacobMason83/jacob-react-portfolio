@@ -78,7 +78,7 @@ export default class PortfolioManager extends Component {
          />
 
       </div>
-      <div className="right-column">
+      <div className="right-column-manager">
         
       <PortfolioSideBarList  data={this.state.portfolioItems}
          handleDeleteClick={this.handleDeleteClick}
