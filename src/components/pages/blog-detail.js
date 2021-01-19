@@ -13,15 +13,21 @@ export default class BlogDetail extends Component {
       editMode: false
     }
   }
-  handleFeaturedImageDelete =() => {
+  handleUpdateFormSubmission = blog => {
+    this.setState({
+      blogItem: blog,
+      editMode: false
+    })
+  }
+  handleFeaturedImageDelete = () => {
     this.setState({
       blogItem: {
-        featured_image_url: ""
+        featured_image_url: ''
       }
     })
   }
   handleEditClick = () => {
-    console.log("from handleEditClick")
+    
     this.setState({
       editMode: true
     })
@@ -45,7 +51,6 @@ export default class BlogDetail extends Component {
   }
 
   render () {
-
     const {
       title,
       content,
@@ -53,24 +58,26 @@ export default class BlogDetail extends Component {
       blog_status
     } = this.state.blogItem
 
-
     const contentManager = () => {
-      if(this.state.editMode){
-        return <BlogForm editMode={this.state.editMode} blog={this.state.blogItem} handleFeaturedImageDelete={this.handleFeaturedImageDelete} />
-      } else{
+      if (this.state.editMode) {
+        return (
+          <BlogForm
+            editMode={this.state.editMode}
+            blog={this.state.blogItem}
+            handleFeaturedImageDelete={this.handleFeaturedImageDelete}
+            handleUpdateFormSubmission={this.handleUpdateFormSubmission}
+          />
+        )
+      } else {
         return (
           <div className='content-container'>
-          <h1 onClick={this.handleEditClick}>{title}</h1>
-         <BlogFeaturedImage img={featured_image_url} />
-          <div>{ReactHtmlParser(content)}</div>
-        </div>
+            <h1 onClick={this.handleEditClick}>{title}</h1>
+            <BlogFeaturedImage img={featured_image_url} />
+            <div>{ReactHtmlParser(content)}</div>
+          </div>
         )
       }
     }
-    return (
-      <div className='blog-container'>
-       {contentManager()} 
-      </div>
-    )
+    return <div className='blog-container'>{contentManager()}</div>
   }
 }

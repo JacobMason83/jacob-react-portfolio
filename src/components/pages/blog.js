@@ -6,8 +6,8 @@ import BlogItem from '../blog/blog-item'
 import BlogModal from '../modals/blog-modal'
 
 class Blog extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       blogItems: [],

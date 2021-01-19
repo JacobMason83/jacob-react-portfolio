@@ -12,7 +12,9 @@ export default class BlogForm extends Component {
         title: "", 
         blog_status: "",
         content: "",
-        featured_image: ""
+        featured_image: "",
+        apiUrl: "https://jacobmason.devcamp.space/portfolio/portfolio_blogs",
+        apiAction: ""
     }
     this.featuredImageRef = createRef()
   }
@@ -22,7 +24,10 @@ export default class BlogForm extends Component {
       this.setState({
         id: this.props.blog.id,
         title: this.props.blog.title,
-        status: this.props.blog.status
+        blog_status: this.props.blog.blog_status,
+        content: this.props.blog.content,
+        apiUrl: `https://jacobmason.devcamp.space/portfolio/portfolio_blogs/${this.props.blog.id}`,
+        apiAction: "patch"
       })
     }
   }
@@ -63,17 +68,23 @@ export default class BlogForm extends Component {
   handleSubmit = (e) => {
       e.preventDefault()
 
-      axios
-      .post("https://jacobmason.devcamp.space/portfolio/portfolio_blogs",
-       this.buildForm(), 
-       { withCredentials: true })
+      axios({
+        method: this.state.apiAction,
+        url: this.state.apiUrl,
+        data: this.buildForm(),
+        withCredentials: true
+    })
       .then(res => {
         
         if(this.state.featured_image){
           this.featuredImageRef.current.dropzone.removeAllFiles()
         }   
-
+        if(this.props.editMode){
+          //update blog
+          this.props.handleUpdateFormSubmission(res.data.portfolio_blog)
+        }  else {
         this.props.handleSuccessfullFormSubmission(res.data.portfolio_blog);
+        }
       })
       .catch(err => console.error("error from handlesubmit blog-form", err))
      

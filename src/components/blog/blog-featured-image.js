@@ -2,8 +2,7 @@ import React from 'react';
 
 
 
-const  BlogFeaturedImage = props => {
-    console.log(props)
+const  BlogFeaturedImage = props => {    
     if(!props.img) {
         return null 
     }else {
