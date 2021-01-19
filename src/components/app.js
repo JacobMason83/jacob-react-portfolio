@@ -132,7 +132,7 @@ authorizedPages = () => {
               )}              
                /> 
               {this.state.loggedInStatus === "LOGGED_IN" ? this.authorizedPages() : null}
-              <Route path='/portfolio:slug' component={PortfolioDetail} />
+              <Route path='/portfolio/:slug' component={PortfolioDetail} />
               
               <Route component={NoMatch} />
             </Switch>
